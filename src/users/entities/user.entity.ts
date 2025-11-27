@@ -1,6 +1,6 @@
 import { Exclude } from 'class-transformer';
-import { CreateUserDto } from '../dto/create-user.dto';
 import { v4 as uuidv4 } from 'uuid';
+import { CreateUserDto } from '../dto/create-user.dto';
 
 export class User {
   id: string;

@@ -3,10 +3,10 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { store } from 'src/store';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdatePasswordDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { store } from 'src/store';
 
 @Injectable()
 export class UsersService {
@@ -29,10 +29,7 @@ export class UsersService {
   }
 
   update(id: string, updatePasswordDto: UpdatePasswordDto) {
-    const user = store.users.get(id);
-    if (!user) {
-      throw new NotFoundException(`User #${id} not found`);
-    }
+    const user = this.findOne(id);
     if (user.password !== updatePasswordDto.oldPassword) {
       throw new ForbiddenException(
         `The password for user #${id} does not match`,
