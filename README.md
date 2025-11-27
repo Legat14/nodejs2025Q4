@@ -81,3 +81,5 @@ For more information, visit: https://code.visualstudio.com/docs/editor/debugging
 - /user/:id - GET, PUT, DELETE
 - /artist - GET, POST
 - /artist/:id - GET, PUT, DELETE
+- /track - GET, POST
+- /track/:id - GET, PUT, DELETE
