@@ -14,7 +14,7 @@ git clone {repository URL}
 ## Installing NPM modules
 
 ```
-npm install
+npm install or yarn install (recommended!)
 ```
 
 ## Running application
@@ -55,6 +55,10 @@ To run only specific test suite with authorization
 npm run test:auth -- <path to suite>
 ```
 
+# ATTENTION, PLEASE!
+
+If tests are failing with `TypeError: Cannot read properties of undefined (reading 'prototype')` or something alike, please delete node_modules folder and install dependencies again with `yarn install` command (install yarn if you don't have it).
+
 ### Auto-fix and format
 
 ```
@@ -70,3 +74,8 @@ npm run format
 Press <kbd>F5</kbd> to debug.
 
 For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+
+### API
+
+- /user - GET, POST
+- /user/:id - GET, PUT, DELETE
