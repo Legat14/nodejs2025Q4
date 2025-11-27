@@ -26,9 +26,7 @@ export class ArtistsService {
 
   update(id: string, updateArtistDto: UpdateArtistDto) {
     const artist = this.findOne(id);
-    Object.entries(updateArtistDto).forEach(([key, value]) => {
-      artist[key] = value;
-    });
+    Object.assign(artist, updateArtistDto);
     return artist;
   }
 
