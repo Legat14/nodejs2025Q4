@@ -79,3 +79,5 @@ For more information, visit: https://code.visualstudio.com/docs/editor/debugging
 
 - /user - GET, POST
 - /user/:id - GET, PUT, DELETE
+- /artist - GET, POST
+- /artist/:id - GET, PUT, DELETE
