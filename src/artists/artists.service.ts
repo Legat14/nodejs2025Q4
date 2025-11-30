@@ -1,13 +1,19 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { store } from 'src/store';
 import { FavoritesService } from 'src/favorites/favorites.service';
+import { TracksService } from 'src/tracks/tracks.service';
+import { AlbumsService } from 'src/albums/albums.service';
 import { CreateArtistDto } from './dto/create-artist.dto';
 import { UpdateArtistDto } from './dto/update-artist.dto';
 import { Artist } from './entities/artist.entity';
 
 @Injectable()
 export class ArtistsService {
-  constructor(private readonly favoritesService: FavoritesService) {}
+  constructor(
+    private readonly favoritesService: FavoritesService,
+    private readonly tracksService: TracksService,
+    private readonly albumsService: AlbumsService,
+  ) {}
 
   create(createArtistDto: CreateArtistDto) {
     const artist = new Artist(createArtistDto);
@@ -34,7 +40,9 @@ export class ArtistsService {
   }
 
   remove(id: string) {
-    const isInFavorites = this.favoritesService.getOne(id, 'artist');
+    this.tracksService.resetArtistIdToNull(id);
+    this.albumsService.resetArtistIdToNull(id);
+    const isInFavorites = this.favoritesService.isInFavorites(id, 'artist');
     if (isInFavorites) {
       this.favoritesService.remove(id, 'artist');
     }

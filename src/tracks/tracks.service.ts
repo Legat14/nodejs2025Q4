@@ -35,13 +35,27 @@ export class TracksService {
   }
 
   remove(id: string) {
-    const isInFavorites = this.favoritesService.getOne(id, 'track');
+    const isInFavorites = this.favoritesService.isInFavorites(id, 'track');
     if (isInFavorites) {
       this.favoritesService.remove(id, 'track');
     }
     const isDeleted = store.tracks.delete(id);
     if (!isDeleted) {
       throw new NotFoundException(`Track #${id} not found`);
+    }
+  }
+
+  resetArtistIdToNull(artistId: string) {
+    const track = this.findAll().find((track) => track.artistId === artistId);
+    if (track) {
+      track.artistId = null;
+    }
+  }
+
+  resetAlbumIdToNull(albumId: string) {
+    const track = this.findAll().find((track) => track.albumId === albumId);
+    if (track) {
+      track.albumId = null;
     }
   }
 }
