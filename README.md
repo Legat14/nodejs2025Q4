@@ -8,13 +8,13 @@
 ## Downloading
 
 ```
-git clone {repository URL}
+git clone https://github.com/Legat14/nodejs2025Q4.git
 ```
 
 ## Installing NPM modules
 
 ```
-npm install
+npm install or yarn install (recommended!)
 ```
 
 ## Running application
@@ -26,6 +26,10 @@ npm start
 After starting the app on port (4000 as default) you can open
 in your browser OpenAPI documentation by typing http://localhost:4000/doc/.
 For more information about OpenAPI/Swagger please visit https://swagger.io/.
+
+## Environment
+
+If you want to change the port number, you can copy the `.env.example` file, rename it to `.env`, and update the port value in it.
 
 ## Testing
 
@@ -55,6 +59,10 @@ To run only specific test suite with authorization
 npm run test:auth -- <path to suite>
 ```
 
+# ATTENTION, PLEASE!
+
+If tests are failing with `TypeError: Cannot read properties of undefined (reading 'prototype')` or something alike, please delete node_modules folder and install dependencies again with `yarn install` command ([install yarn](https://classic.yarnpkg.com/en/docs/install#windows-stable) if you don't have it).
+
 ### Auto-fix and format
 
 ```
@@ -70,3 +78,18 @@ npm run format
 Press <kbd>F5</kbd> to debug.
 
 For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+
+### API
+
+- /user - GET, POST
+- /user/:id - GET, PUT, DELETE
+- /artist - GET, POST
+- /artist/:id - GET, PUT, DELETE
+- /track - GET, POST
+- /track/:id - GET, PUT, DELETE
+- /album - GET, POST
+- /album/:id - GET, PUT, DELETE
+- /favs - GET
+- /favs/track/:id - POST, DELETE
+- /favs/album/:id - POST, DELETE
+- /favs/artist/:id - POST, DELETE
