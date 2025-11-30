@@ -85,3 +85,7 @@ For more information, visit: https://code.visualstudio.com/docs/editor/debugging
 - /track/:id - GET, PUT, DELETE
 - /album - GET, POST
 - /album/:id - GET, PUT, DELETE
+- /favs - GET
+- /favs/track/:id - POST, DELETE
+- /favs/album/:id - POST, DELETE
+- /favs/artist/:id - POST, DELETE

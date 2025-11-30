@@ -22,8 +22,6 @@ const favorites = new Map<FavoritesCategory, Set<string>>([
   ['artists', new Set<string>()],
 ]);
 
-console.log('favorites >>>>>>', favorites);
-
 export const store = {
   users,
   artists,
