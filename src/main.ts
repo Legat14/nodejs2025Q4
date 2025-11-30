@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
+  const PORT = process.env.PORT || 4000;
   const app = await NestFactory.create(AppModule);
 
   app.useGlobalPipes(
@@ -15,7 +16,7 @@ async function bootstrap() {
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
-  await app.listen(4000);
+  await app.listen(PORT);
 }
 
 bootstrap();
