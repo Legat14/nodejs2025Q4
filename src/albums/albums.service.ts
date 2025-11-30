@@ -1,11 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { store } from 'src/store';
+import { FavoritesService } from 'src/favorites/favorites.service';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
 import { Album } from './entities/album.entity';
 
 @Injectable()
 export class AlbumsService {
+  constructor(private readonly favoritesService: FavoritesService) {}
+
   create(createAlbumDto: CreateAlbumDto) {
     const album = new Album(createAlbumDto);
     store.albums.set(album.id, album);
@@ -31,6 +34,10 @@ export class AlbumsService {
   }
 
   remove(id: string) {
+    const isInFavorites = this.favoritesService.getOne(id, 'album');
+    if (isInFavorites) {
+      this.favoritesService.remove(id, 'album');
+    }
     const isDeleted = store.albums.delete(id);
     if (!isDeleted) {
       throw new NotFoundException(`Album #${id} not found`);

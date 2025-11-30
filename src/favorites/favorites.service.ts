@@ -25,6 +25,12 @@ export class FavoritesService {
     return { tracks, albums, artists };
   }
 
+  getOne(id: string, entity: FavoritesEntity) {
+    const category = entityCategoryMap[entity];
+    const isInFavorites = store.favorites.get(category).has(id);
+    return isInFavorites;
+  }
+
   add(id: string, entity: FavoritesEntity) {
     const category = entityCategoryMap[entity];
     const isExists = store[category].has(id);

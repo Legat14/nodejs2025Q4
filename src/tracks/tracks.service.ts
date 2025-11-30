@@ -1,11 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { store } from 'src/store';
+import { FavoritesService } from 'src/favorites/favorites.service';
 import { CreateTrackDto } from './dto/create-track.dto';
 import { UpdateTrackDto } from './dto/update-track.dto';
 import { Track } from './entities/track.entity';
 
 @Injectable()
 export class TracksService {
+  constructor(private readonly favoritesService: FavoritesService) {}
+
   create(createTrackDto: CreateTrackDto) {
     const track = new Track(createTrackDto);
     store.tracks.set(track.id, track);
@@ -32,8 +35,11 @@ export class TracksService {
   }
 
   remove(id: string) {
+    const isInFavorites = this.favoritesService.getOne(id, 'track');
+    if (isInFavorites) {
+      this.favoritesService.remove(id, 'track');
+    }
     const isDeleted = store.tracks.delete(id);
-
     if (!isDeleted) {
       throw new NotFoundException(`Track #${id} not found`);
     }
