@@ -8,7 +8,7 @@
 ## Downloading
 
 ```
-git clone {repository URL}
+git clone https://github.com/Legat14/nodejs2025Q4.git
 ```
 
 ## Installing NPM modules
@@ -57,7 +57,7 @@ npm run test:auth -- <path to suite>
 
 # ATTENTION, PLEASE!
 
-If tests are failing with `TypeError: Cannot read properties of undefined (reading 'prototype')` or something alike, please delete node_modules folder and install dependencies again with `yarn install` command (install yarn if you don't have it).
+If tests are failing with `TypeError: Cannot read properties of undefined (reading 'prototype')` or something alike, please delete node_modules folder and install dependencies again with `yarn install` command ([install yarn](https://classic.yarnpkg.com/en/docs/install#windows-stable) if you don't have it).
 
 ### Auto-fix and format
 
