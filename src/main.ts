@@ -17,6 +17,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
   await app.listen(PORT);
+  console.log(`The app is running on port: \x1b[36;1m${PORT}\x1b[0m`);
 }
 
 bootstrap();
