@@ -89,3 +89,33 @@ For more information, visit: https://code.visualstudio.com/docs/editor/debugging
 - /favs/track/:id - POST, DELETE
 - /favs/album/:id - POST, DELETE
 - /favs/artist/:id - POST, DELETE
+
+## Docker
+
+Install [https://www.docker.com/products/docker-desktop/](Docker Desktop) for your system and **start it before run app**
+
+### Enter this command on the first run:
+
+Build docker containers and connect
+
+```
+npm run docker:build
+```
+
+To start DB and app after containers were built run this command
+
+```
+npm run docker:up
+```
+
+Enter database
+
+```
+docker exec -it postgres_db psql -U {DB_USER} -d {DB_NAME}
+```
+
+Check containers in run
+
+```
+docker ps
+```

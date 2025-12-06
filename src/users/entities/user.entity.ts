@@ -1,22 +1,30 @@
 import { Exclude } from 'class-transformer';
-import { v4 as uuidv4 } from 'uuid';
-import { CreateUserDto } from '../dto/create-user.dto';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
+@Entity('users')
 export class User {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
-  login: string;
-  @Exclude()
-  password: string;
-  version: number;
-  createdAt: number;
-  updatedAt: number;
 
-  constructor(dto: CreateUserDto) {
-    this.login = dto.login;
-    this.password = dto.password;
-    this.id = uuidv4();
-    this.version = 1;
-    this.createdAt = new Date().getTime();
-    this.updatedAt = new Date().getTime();
-  }
+  @Column({ unique: true })
+  login: string;
+
+  @Exclude()
+  @Column()
+  password: string;
+
+  @Column({ default: 1 })
+  version: number;
+
+  @CreateDateColumn({ type: 'bigint' })
+  createdAt: number;
+
+  @UpdateDateColumn({ type: 'bigint' })
+  updatedAt: number;
 }
