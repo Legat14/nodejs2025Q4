@@ -110,6 +110,12 @@ docker network inspect nodejs2025q4_mycustomhandmadenet
 
 And you'll see both containers, connected to the bridge
 
+[Docker image on Docker Hub](https://hub.docker.com/r/legat14/rest-service)
+
+```
+docker pull legat14/rest-service
+```
+
 ## Testing
 
 After application running open new terminal and enter:
