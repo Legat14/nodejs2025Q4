@@ -1,14 +1,13 @@
-import { v4 as uuidv4 } from 'uuid';
-import { CreateArtistDto } from '../dto/create-artist.dto';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity('artists')
 export class Artist {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
-  name: string;
-  grammy: boolean;
 
-  constructor(dto: CreateArtistDto) {
-    this.id = uuidv4();
-    this.name = dto.name;
-    this.grammy = dto.grammy;
-  }
+  @Column()
+  name: string;
+
+  @Column({ type: 'boolean' })
+  grammy: boolean;
 }
