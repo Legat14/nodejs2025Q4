@@ -78,6 +78,12 @@ then `\dt` to list the tables. You should see all entity tables.
 
 enter `\q` to exit
 
+To check volumes
+
+```
+docker volume ls
+```
+
 ## Testing
 
 After application running open new terminal and enter:

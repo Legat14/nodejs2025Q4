@@ -2,7 +2,6 @@ import { Repository } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { store } from 'src/store';
 import { FavoritesService } from 'src/favorites/favorites.service';
 import { TracksService } from 'src/tracks/tracks.service';
 import { CreateAlbumDto } from './dto/create-album.dto';
