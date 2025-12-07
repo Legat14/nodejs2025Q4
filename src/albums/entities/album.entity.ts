@@ -1,16 +1,16 @@
-import { v4 as uuidv4 } from 'uuid';
-import { CreateAlbumDto } from '../dto/create-album.dto';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity('albums')
 export class Album {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
-  name: string;
-  year: number;
-  artistId: string | null;
 
-  constructor(dto: CreateAlbumDto) {
-    this.id = uuidv4();
-    this.name = dto.name;
-    this.year = dto.year;
-    this.artistId = dto.artistId;
-  }
+  @Column()
+  name: string;
+
+  @Column()
+  year: number;
+
+  @Column({ type: 'uuid', nullable: true })
+  artistId: string | null;
 }
