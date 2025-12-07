@@ -68,6 +68,7 @@ export class UsersService {
     user.password = await bcrypt.hash(updatePasswordDto.newPassword, salt);
     user.version += 1;
     user.updatedAt = Date.now();
+    await this.usersRepo.save(user);
     return user;
   }
 

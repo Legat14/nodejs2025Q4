@@ -1,8 +1,6 @@
 node_modules
 dist
-doc
 .git
 .gitignore
-.env
 Dockerfile-db
 Dockerfile-app

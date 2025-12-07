@@ -1,30 +1,25 @@
 import { Exclude } from 'class-transformer';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { bigintTransformer } from 'src/bigint-transformer';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
-  @Column({ unique: true })
-  login: string;
+  @Column()
+  login!: string;
 
   @Exclude()
   @Column()
-  password: string;
+  password!: string;
 
   @Column({ default: 1 })
-  version: number;
+  version!: number;
 
-  @CreateDateColumn({ type: 'bigint' })
-  createdAt: number;
+  @Column({ type: 'bigint', transformer: bigintTransformer })
+  createdAt!: number;
 
-  @UpdateDateColumn({ type: 'bigint' })
-  updatedAt: number;
+  @Column({ type: 'bigint', transformer: bigintTransformer })
+  updatedAt!: number;
 }

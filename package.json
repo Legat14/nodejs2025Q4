@@ -23,10 +23,11 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "migration:generate": "typeorm-ts-node-commonjs migration:generate -d src/data-source.ts",
-    "migration:run": "typeorm migration:run -d src/data-source.ts",
+    "migration:generate": "typeorm-ts-node-commonjs migration:generate -d src/data-source.ts dist/migrations/migration",
+    "migration:run": "typeorm-ts-node-commonjs migration:run -d src/data-source.ts",
     "docker:build": "docker compose up --build",
-    "docker:up": "docker compose up"
+    "docker:up": "docker compose up",
+    "docker:down:v": "docker compose down --volumes"
   },
   "dependencies": {
     "@nestjs/common": "^10.4.16",
