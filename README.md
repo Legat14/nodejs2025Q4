@@ -4,6 +4,7 @@
 
 - Git - [Download & Install Git](https://git-scm.com/downloads).
 - Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager v.24 LTE.
+- Docker desktop - [Download & Install Docker desktop](https://www.docker.com/products/docker-desktop/).
 
 ## Downloading
 
@@ -11,21 +12,71 @@
 git clone https://github.com/Legat14/nodejs2025Q4.git
 ```
 
-## Installing NPM modules
+## Docker
 
-```
-npm install or yarn install
-```
-
-## Running application
-
-```
-npm start
-```
+Start the Docker desktop before running the app
 
 ## Environment
 
-If you want to change the port number, you can copy the `.env.example` file, rename it to `.env`, and update the port value in it.
+Copy the `.env.example` file and rename it to `.env`
+
+## Start app
+
+### Build docker container
+
+The server will start automatically after the container is built
+
+```
+npm run docker:build
+```
+
+### Start the Docker container if it has already been built
+
+```
+npm run docker:up
+```
+
+## Migrations
+
+After container is up and the server is running the first time, generate and apply migrations
+
+### Generate migrations
+
+```
+docker compose exec app npm run migration:generate
+```
+
+### Apply migrations
+
+```
+docker compose exec app npm run migration:run
+```
+
+### Reset all settings
+
+If something is wrong, please enter this command and start from building of containers
+
+```
+npm run docker:down:v
+```
+
+To check if containers built and up correctly, enter
+
+```
+docker ps
+```
+
+and you should see two docker containers: with DB and app
+
+To check if migrations applied correctly, enter
+
+```
+docker exec -it postgres_db psql -U {DB_USER} -d {DB_NAME}
+```
+
+then `\dt` to list the tables. You should see all entity tables.
+
+enter `\q` to exit
 
 ## Testing
 
@@ -54,10 +105,6 @@ To run only specific test suite with authorization
 ```
 npm run test:auth -- <path to suite>
 ```
-
-# ATTENTION, PLEASE!
-
-If tests are failing with `TypeError: Cannot read properties of undefined (reading 'prototype')` or something alike, please delete node_modules folder and install dependencies again with `yarn install` command ([install yarn](https://classic.yarnpkg.com/en/docs/install#windows-stable) if you don't have it).
 
 ### Auto-fix and format
 
@@ -89,33 +136,3 @@ For more information, visit: https://code.visualstudio.com/docs/editor/debugging
 - /favs/track/:id - POST, DELETE
 - /favs/album/:id - POST, DELETE
 - /favs/artist/:id - POST, DELETE
-
-## Docker
-
-Install [https://www.docker.com/products/docker-desktop/](Docker Desktop) for your system and **start it before run app**
-
-### Enter this command on the first run:
-
-Build docker containers and connect
-
-```
-npm run docker:build
-```
-
-To start DB and app after containers were built run this command
-
-```
-npm run docker:up
-```
-
-Enter database
-
-```
-docker exec -it postgres_db psql -U {DB_USER} -d {DB_NAME}
-```
-
-Check containers in run
-
-```
-docker ps
-```
