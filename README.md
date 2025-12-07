@@ -84,6 +84,16 @@ To check volumes
 docker volume ls
 ```
 
+## To check containers restart
+
+```
+docker exec rest_service_app kill 1
+docker exec postgres_db kill 1
+docker ps
+```
+
+You'll see the both containers running
+
 ## Testing
 
 After application running open new terminal and enter:

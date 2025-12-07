@@ -2,6 +2,7 @@ services:
   app:
     build: .
     container_name: rest_service_app
+    restart: always
     ports:
       - '4000:4000'
     depends_on:
