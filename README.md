@@ -94,6 +94,22 @@ docker ps
 
 You'll see the both containers running
 
+## To check user-defined bridge
+
+```
+docker network ls
+```
+
+You'll see mycustomhandmadenet bridge in the list
+
+Use the full name of the bridge in the next command
+
+```
+docker network inspect nodejs2025q4_mycustomhandmadenet
+```
+
+And you'll see both containers, connected to the bridge
+
 ## Testing
 
 After application running open new terminal and enter:
