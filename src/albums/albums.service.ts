@@ -53,7 +53,6 @@ export class AlbumsService {
   }
 
   async remove(id: string) {
-    this.tracksService.resetAlbumIdToNull(id);
     const isInFavorites = this.favoritesService.isInFavorites(id, 'album');
     if (isInFavorites) {
       this.favoritesService.remove(id, 'album');
@@ -61,16 +60,6 @@ export class AlbumsService {
     const result = await this.albumRepo.delete(id);
     if (result.affected === 0) {
       throw new NotFoundException(`Album #${id} not found`);
-    }
-  }
-
-  async resetArtistIdToNull(artistId: string) {
-    const album = (await this.findAll()).find(
-      (album) => album.artistId === artistId,
-    );
-    if (album) {
-      album.artistId = null;
-      await this.albumRepo.save(album);
     }
   }
 }

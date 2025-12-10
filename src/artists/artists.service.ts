@@ -56,8 +56,6 @@ export class ArtistsService {
   }
 
   async remove(id: string) {
-    this.tracksService.resetArtistIdToNull(id);
-    this.albumsService.resetArtistIdToNull(id);
     const isInFavorites = this.favoritesService.isInFavorites(id, 'artist');
     if (isInFavorites) {
       this.favoritesService.remove(id, 'artist');

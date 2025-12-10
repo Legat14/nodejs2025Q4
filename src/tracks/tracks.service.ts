@@ -65,24 +65,4 @@ export class TracksService {
       throw new NotFoundException(`Track #${id} not found`);
     }
   }
-
-  async resetArtistIdToNull(artistId: string) {
-    const track = (await this.findAll()).find(
-      (track) => track.artistId === artistId,
-    );
-    if (track) {
-      track.artistId = null;
-      await this.trackRepository.save(track);
-    }
-  }
-
-  async resetAlbumIdToNull(albumId: string) {
-    const track = (await this.findAll()).find(
-      (track) => track.albumId === albumId,
-    );
-    if (track) {
-      track.albumId = null;
-      await this.trackRepository.save(track);
-    }
-  }
 }
