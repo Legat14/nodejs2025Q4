@@ -43,13 +43,13 @@ After container is up and the server is running the first time, generate and app
 ### Generate migrations
 
 ```
-docker compose exec app npm run migration:generate
+npm run migration:generate
 ```
 
 ### Apply migrations
 
 ```
-docker compose exec app npm run migration:run
+npm run migration:run
 ```
 
 ### Reset all settings
