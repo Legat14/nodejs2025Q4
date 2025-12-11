@@ -18,25 +18,7 @@ Start the Docker desktop before running the app
 
 ## Environment
 
-Create `.env` file with next content
-
-```
-PORT=4000
-
-CRYPT_SALT=10
-JWT_SECRET_KEY=secret123123
-JWT_SECRET_REFRESH_KEY=secret123123
-TOKEN_EXPIRE_TIME=1h
-TOKEN_REFRESH_EXPIRE_TIME=24h
-
-# Database configuration
-DB_HOST=db
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=postgres
-DB_NAME=home_library
-NODE_ENV=development
-```
+Copy the `.env.example` file and rename it to `.env`
 
 ## Start app
 
