@@ -1,22 +1,25 @@
 import { Exclude } from 'class-transformer';
-import { v4 as uuidv4 } from 'uuid';
-import { CreateUserDto } from '../dto/create-user.dto';
+import { bigintTransformer } from 'src/bigint-transformer';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity('users')
 export class User {
-  id: string;
-  login: string;
-  @Exclude()
-  password: string;
-  version: number;
-  createdAt: number;
-  updatedAt: number;
+  @PrimaryGeneratedColumn('uuid')
+  id!: string;
 
-  constructor(dto: CreateUserDto) {
-    this.login = dto.login;
-    this.password = dto.password;
-    this.id = uuidv4();
-    this.version = 1;
-    this.createdAt = new Date().getTime();
-    this.updatedAt = new Date().getTime();
-  }
+  @Column()
+  login!: string;
+
+  @Exclude()
+  @Column()
+  password!: string;
+
+  @Column({ default: 1 })
+  version!: number;
+
+  @Column({ type: 'bigint', transformer: bigintTransformer })
+  createdAt!: number;
+
+  @Column({ type: 'bigint', transformer: bigintTransformer })
+  updatedAt!: number;
 }
