@@ -12,10 +12,14 @@ import {
 import { ArtistsService } from './artists.service';
 import { CreateArtistDto } from './dto/create-artist.dto';
 import { UpdateArtistDto } from './dto/update-artist.dto';
+import { FavoritesService } from '../favorites/favorites.service';
 
 @Controller('artist')
 export class ArtistsController {
-  constructor(private readonly artistsService: ArtistsService) {}
+  constructor(
+    private readonly artistsService: ArtistsService,
+    private readonly favoritesService: FavoritesService,
+  ) {}
 
   @Post()
   create(@Body() createArtistDto: CreateArtistDto) {
@@ -43,6 +47,7 @@ export class ArtistsController {
   @Delete(':id')
   @HttpCode(204)
   remove(@Param('id', new ParseUUIDPipe()) id: string) {
+    this.favoritesService.remove(id, 'artist');
     return this.artistsService.remove(id);
   }
 }

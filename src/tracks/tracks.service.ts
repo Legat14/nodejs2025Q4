@@ -1,12 +1,11 @@
-import { Repository } from 'typeorm';
-import { v4 as uuidv4 } from 'uuid';
 import {
   Injectable,
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FavoritesService } from 'src/favorites/favorites.service';
+import { Repository } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 import { CreateTrackDto } from './dto/create-track.dto';
 import { UpdateTrackDto } from './dto/update-track.dto';
 import { Track } from './entities/track.entity';
@@ -16,7 +15,6 @@ export class TracksService {
   constructor(
     @InjectRepository(Track)
     private readonly trackRepository: Repository<Track>,
-    private readonly favoritesService: FavoritesService,
   ) {}
 
   async create(createTrackDto: CreateTrackDto) {
@@ -24,9 +22,9 @@ export class TracksService {
     const track: Track = this.trackRepository.create({
       id: uuidv4(),
       name,
+      duration,
       artistId: artistId || null,
       albumId: albumId || null,
-      duration,
     });
 
     try {
@@ -56,10 +54,6 @@ export class TracksService {
   }
 
   async remove(id: string) {
-    const isInFavorites = this.favoritesService.isInFavorites(id, 'track');
-    if (isInFavorites) {
-      this.favoritesService.remove(id, 'track');
-    }
     const result = await this.trackRepository.delete({ id });
     if (result.affected === 0) {
       throw new NotFoundException(`Track #${id} not found`);

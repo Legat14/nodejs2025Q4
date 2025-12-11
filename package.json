@@ -25,6 +25,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "migration:generate": "docker compose exec app npx typeorm-ts-node-commonjs migration:generate -d src/data-source.ts src/migrations/migration",
     "migration:run": "docker compose exec app npx typeorm-ts-node-commonjs migration:run -d src/data-source.ts",
+    "migration:generate-and-run": "npm run migration:generate && npm run migration:run",
     "docker:build": "docker compose up --build",
     "docker:up": "docker compose up",
     "docker:down:v": "docker compose down --volumes"

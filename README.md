@@ -40,16 +40,10 @@ npm run docker:up
 
 After container is up and the server is running the first time, generate and apply migrations
 
-### Generate migrations
+### Generate and run migrations
 
 ```
-npm run migration:generate
-```
-
-### Apply migrations
-
-```
-npm run migration:run
+npm run migration:generate-and-run
 ```
 
 ### Reset all settings

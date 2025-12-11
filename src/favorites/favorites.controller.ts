@@ -1,4 +1,4 @@
-import { FavoritesEntity } from 'src/store';
+import { FavoritesEntity } from './entities/favorites.entity.types';
 import {
   Controller,
   Get,

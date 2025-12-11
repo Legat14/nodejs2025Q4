@@ -12,10 +12,14 @@ import {
 import { TracksService } from './tracks.service';
 import { CreateTrackDto } from './dto/create-track.dto';
 import { UpdateTrackDto } from './dto/update-track.dto';
+import { FavoritesService } from '../favorites/favorites.service';
 
 @Controller('track')
 export class TracksController {
-  constructor(private readonly tracksService: TracksService) {}
+  constructor(
+    private readonly tracksService: TracksService,
+    private readonly favoritesService: FavoritesService,
+  ) {}
 
   @Post()
   create(@Body() createTrackDto: CreateTrackDto) {
@@ -43,6 +47,7 @@ export class TracksController {
   @Delete(':id')
   @HttpCode(204)
   remove(@Param('id', new ParseUUIDPipe()) id: string) {
+    this.favoritesService.remove(id, 'track');
     return this.tracksService.remove(id);
   }
 }
