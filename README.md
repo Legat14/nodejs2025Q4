@@ -78,6 +78,17 @@ To check volumes
 docker volume ls
 ```
 
+## To check the log file
+
+```
+docker compose exec app sh
+cd logs
+ls
+cat <file-name from the list (for example rest-service.log)>
+```
+
+To exit from docker container, type `exit`
+
 ## To check containers restart
 
 ```
