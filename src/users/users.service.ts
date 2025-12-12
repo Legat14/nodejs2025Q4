@@ -53,6 +53,10 @@ export class UsersService {
     return user;
   }
 
+  async findByLogin(login: string) {
+    return await this.usersRepo.findOne({ where: { login } });
+  }
+
   async update(id: string, updatePasswordDto: UpdatePasswordDto) {
     const user = await this.findOne(id);
     const isMatch = await bcrypt.compare(

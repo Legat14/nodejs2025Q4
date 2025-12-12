@@ -10,6 +10,7 @@ import { AlbumsModule } from './albums/albums.module';
 import { FavoritesModule } from './favorites/favorites.module';
 import { LoggingService } from './logging/logging.service';
 import { LoggingMiddleware } from './logging/loggitn.middleware';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { LoggingMiddleware } from './logging/loggitn.middleware';
     TracksModule,
     AlbumsModule,
     FavoritesModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, LoggingService],
