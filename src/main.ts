@@ -1,8 +1,9 @@
 import { NestFactory, Reflector } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
+import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './filters/filters.all-exceptions';
 import { LoggingService } from './logging/logging.service';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 async function bootstrap() {
   const PORT = process.env.PORT || 4000;
@@ -19,6 +20,8 @@ async function bootstrap() {
   );
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+
+  app.useGlobalGuards(app.get(AuthGuard));
 
   process.on('uncaughtException', (error) => {
     logger.error('Uncaught exception', error.stack);
