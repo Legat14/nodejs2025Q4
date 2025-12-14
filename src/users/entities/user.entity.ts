@@ -1,5 +1,5 @@
 import { Exclude } from 'class-transformer';
-import { bigintTransformer } from 'src/bigint-transformer';
+import { bigintTransformer } from '../../bigint-transformer';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')
