@@ -10,6 +10,7 @@
 
 ```
 git clone https://github.com/Legat14/nodejs2025Q4.git
+git checkout --track origin/develop-part-3
 ```
 
 ## Docker
@@ -48,7 +49,7 @@ npm run migration:generate-and-run
 
 ### Reset all settings
 
-If something is wrong, please enter this command and start from building of containers
+If something is wrong, please enter this command and start again from building of containers
 
 ```
 npm run docker:down:v
@@ -68,7 +69,7 @@ To check if migrations applied correctly, enter
 docker exec -it postgres_db psql -U {DB_USER} -d {DB_NAME}
 ```
 
-then `\dt` to list the tables. You should see all entity tables.
+then `\dt` to list the tables. You should see all entity's tables.
 
 enter `\q` to exit
 
@@ -80,11 +81,13 @@ docker volume ls
 
 ## To check the log file
 
+run tests or make some requests from the postman then
+
 ```
 docker compose exec app sh
 cd logs
 ls
-cat <file-name from the list (for example rest-service.log)>
+cat <file-name from the list (for example rest-service.log or rest-service-error.log)>
 ```
 
 To exit from docker container, type `exit`
@@ -125,18 +128,6 @@ docker pull legat14/rest-service
 
 After application running open new terminal and enter:
 
-To run all tests without authorization
-
-```
-npm run test
-```
-
-To run only one of all test suites
-
-```
-npm run test -- <path to suite>
-```
-
 To run all test with authorization
 
 ```
@@ -147,6 +138,12 @@ To run only specific test suite with authorization
 
 ```
 npm run test:auth -- <path to suite>
+```
+
+To run only one of all test suites
+
+```
+npm run test -- <path to suite>
 ```
 
 ### Auto-fix and format
@@ -179,3 +176,6 @@ For more information, visit: https://code.visualstudio.com/docs/editor/debugging
 - /favs/track/:id - POST, DELETE
 - /favs/album/:id - POST, DELETE
 - /favs/artist/:id - POST, DELETE
+- /auth/signup - POST
+- /auth/login - POST
+- /auth/refresh - POST

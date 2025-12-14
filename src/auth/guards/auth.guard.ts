@@ -6,7 +6,13 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-const PUBLIC_ROUTES = ['/', '/auth/signup', '/auth/login'];
+const PUBLIC_ROUTES = [
+  '/',
+  '/auth/signup',
+  '/auth/login',
+  '/auth/refresh',
+  '/doc',
+];
 
 @Injectable()
 export class AuthGuard implements CanActivate {

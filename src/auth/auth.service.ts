@@ -1,8 +1,14 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  HttpException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { SignupDto } from './dto/signup.dto';
 import { LoginDto } from './dto/login.dto';
+import { RefreshDto } from './dto/refresh.dto';
 import { UsersService } from '../users/users.service';
 
 @Injectable()
@@ -42,5 +48,34 @@ export class AuthService {
         expiresIn: process.env.TOKEN_REFRESH_EXPIRE_TIME,
       }),
     };
+  }
+
+  async refresh({ refreshToken }: RefreshDto) {
+    if (!refreshToken) {
+      throw new UnauthorizedException('Refresh token is required');
+    }
+
+    let payload: any;
+
+    try {
+      payload = this.jwtService.verify(refreshToken, {
+        secret: process.env.JWT_SECRET_REFRESH_KEY,
+      });
+    } catch (error) {
+      throw new ForbiddenException('Invalid or expired refresh token');
+    }
+
+    const { userId, login } = payload;
+    const newPayload = { userId, login };
+    const newAccessToken = this.jwtService.sign(newPayload, {
+      secret: process.env.JWT_SECRET_KEY,
+      expiresIn: process.env.TOKEN_EXPIRE_TIME,
+    });
+    const newRefreshToken = this.jwtService.sign(newPayload, {
+      secret: process.env.JWT_SECRET_REFRESH_KEY,
+      expiresIn: process.env.TOKEN_REFRESH_EXPIRE_TIME,
+    });
+
+    return { accessToken: newAccessToken, refreshToken: newRefreshToken };
   }
 }
